@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aklan Catholic College Trivia</title>
+    <style>
+         body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 100px;
+            background-image: url('assets/deologo.png'); /* Add the background image */
+            background-size: cover; /* Adjust the image to cover the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent tiling */
+            color: rgb(168, 190, 173); /* Text color is white */
+        }
+        h1, h2 {
+            color: #c7cecb; /* Updated title color */
+        }
+        img {
+            width: 150px; /* Adjust width as needed */
+            margin-bottom: 50px;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            margin: 5px auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aklan Catholic College Trivia</h1>
+    <div id="quiz-container">
+        <p class="question" id="question">Loading question...</p>
+        <div class="options" id="options"></div>
+        <p id="score">Score: 0</p>
+    </div>
+    <script>
+        const questions = [
+            { question: "In what year was Aklan Catholic College founded?", options: ["1945", "1957", "1962", "1975"], answer: 2 },
+            { question: "What is the official motto of Aklan Catholic College?", options: ["Faith, Excellence, and Service", "Knowledge, Discipline, and Integrity", "Truth, Love, and Justice", "Wisdom, Compassion, and Strength"], answer: 1 },
+            { question: "What are the school colors of Aklan Catholic College?", options: ["Blue and Gold", "Green and White", "Red and Black", "Yellow and Purple"], answer: 1 },
+            { question: "Who is the patron saint of Aklan Catholic College?", options: ["St. Thomas Aquinas", "St. John Paul II", "St. Augustine", "St. Francis of Assisi"], answer: 1 },
+            { question: "Which government agency accredits ACC’s academic programs?", options: ["DepEd", "CHED", "TESDA", "PAASCU"], answer: 2 },
+            { question: "What is the name of the school chapel inside ACC?", options: ["St. Joseph Chapel", "Our Lady of the Most Holy Rosary Chapel", "St. Thomas Aquinas Chapel", "ACC Divine Mercy Chapel"], answer: 3 },
+            { question: "Which annual event at ACC celebrates faith and student talent?", options: ["ACC Fest", "Pista ng ACC", "Sinulog sa ACC", "Aklan Day Celebration"], answer: 1 },
+            { question: "Which course is NOT offered at ACC?", options: ["BSIT", "BSBA", "BS Marine Engineering", "BEEd"], answer: 3 },
+            { question: "Which major subject is part of BSIT?", options: ["Programming", "Accounting", "Political Science", "Hotel Management"], answer: 1 },
+            { question: "Which body oversees ACC’s religious affairs?", options: ["Jesuits", "Augustinian Recollects", "Diocese of Kalibo", "Sacred Heart Missionaries"], answer: 3 },
+            { question: "How many semesters are there in an academic year at ACC?", options: ["1", "2", "3", "4"], answer: 2 },
+            { question: "What is the name of ACC’s student publication?", options: ["The Sentinel", "The Collegian", "The Beacon", "The Aklan Voice"], answer: 1 },
+            { question: "What does ACC emphasize in education?", options: ["Global Research", "Athletic Excellence", "Catholic Leadership", "Business Innovation"], answer: 3 },
+            { question: "Who is the current president of ACC?", options: ["Fr. John Doe", "Fr. Pedro Sanchez", "Fr. Michael Cruz", "Fr. Antonio Reyes"], answer: 4 },
+            { question: "Which of the following is ACC’s affiliated hospital?", options: ["Dr. Rafael S. Tumbokon Memorial Hospital", "St. Gabriel Hospital", "Kalibo Medical Center", "Aklan Baptist Hospital"], answer: 2 },
+            { question: "Which type of scholarship does ACC offer?", options: ["Academic", "Athletic", "Financial Aid", "All of the Above"], answer: 4 },
+            { question: "What is the official student organization for IT students?", options: ["ACCSIT", "CompTech Club", "TechnoGeeks", "ByteMasters"], answer: 1 },
+            { question: "Which event marks the beginning of a new school year at ACC?", options: ["Foundation Day", "Welcome Mass", "Freshmen Orientation", "ACC Pep Rally"], answer: 3 },
+            { question: "What is ACC’s stance on community service?", options: ["Encouraged but optional", "Mandatory for graduation", "Only for scholars", "Not required"], answer: 2 }
+        ];
+        
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const scoreElement = document.getElementById("score");
+
+        function loadQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                const q = questions[currentQuestionIndex];
+                questionElement.textContent = q.question;
+                optionsElement.innerHTML = "";
+                q.options.forEach((option, index) => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.onclick = () => checkAnswer(index + 1);
+                    optionsElement.appendChild(button);
+                });
+            } else {
+                questionElement.textContent = "Game Over! You scored: " + score + " out of " + questions.length;
+                optionsElement.innerHTML = "";
+            }
+        }
+
+        function checkAnswer(selectedIndex) {
+            if (selectedIndex === questions[currentQuestionIndex].answer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            scoreElement.textContent = "Score: " + score;
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
